@@ -1,0 +1,19 @@
+{	
+	"DEMO": {
+		"GOOGLE": "http://www.google.com",
+		"ACCENTURE_MX": "https://www.accenture.com/mx-es",
+		"TELUS_MX": "https://www.telus.com/mx-es"
+	},
+	
+	"SIT": {
+		"GOOGLE": "http://www.google.com",
+		"ACCENTURE_MX": "https://www.accenture.com/mx-es",
+		"TELUS_MX": "https://www.telus.com/mx-es"
+	},
+	
+	"DEV": {
+		"GOOGLE": "http://www.google.com",
+		"ACCENTURE_MX": "https://www.accenture.com/mx-es",
+		"TELUS_MX": "https://www.telus.com/mx-es"
+		}
+}

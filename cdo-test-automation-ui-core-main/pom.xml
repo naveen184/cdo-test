@@ -1,0 +1,331 @@
+<!-- TELUS - CORE UI FRAMEWORK-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>telus.bt.automation</groupId>
+	<artifactId>telus-test-selenium-ui-core</artifactId>
+	<version>4.7-SNAPSHOT</version>
+
+	<name>telus-test-selenium-ui-core</name>
+	<url>http://maven.apache.org</url>
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>bintray-epam-reportportal</id>
+			<name>bintray</name>
+			<url>http://dl.bintray.com/epam/reportportal</url>
+		</repository>
+	</repositories>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.version>2.3.2</maven.compiler.version>
+		<maven.surefire.version>2.19.1</maven.surefire.version>
+		<selenium.version>3.14.0</selenium.version>
+		<cucumber.version>1.2.5</cucumber.version>
+		<testNG.version>7.4.0</testNG.version>
+		<collections4.version>4.1</collections4.version>
+		<log4j.version>2.17.0</log4j.version>
+		<cucumberReporting.version>3.8.0</cucumberReporting.version>
+		<cucumberextentreport.version>3.0.2</cucumberextentreport.version>
+		<extentreports.version>3.1.2</extentreports.version>
+		<poi.version>3.11</poi.version>
+		<self4j.version>1.7.16</self4j.version>
+		<json.version>20180130</json.version>
+		<spring.jdbc.version>5.0.7.RELEASE</spring.jdbc.version>
+		<extentreports.version>3.1.2</extentreports.version>
+		<commons-io.version>2.2</commons-io.version>
+		<forkCount>4</forkCount>
+		<ojdbc.version>12.2.0.1</ojdbc.version>
+		<groovyJson.version>2.5.5</groovyJson.version>
+		<json.simple.version>1.1.1</json.simple.version>
+		<common.core.version>2.8-SNAPSHOT</common.core.version>
+		<!-- SONAR PROPERTIES -->
+		<sonar.sources>src/main</sonar.sources>
+    	<sonar.tests>src/test</sonar.tests>
+	</properties>
+
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+	
+			<!-- Start - execute  test runners -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire.version}</version>
+				<executions>
+					<execution>
+						<id>default-test</id>
+						<configuration>
+							<skip>false</skip>
+							<suiteXmlFiles>
+								<suiteXmlFile>testng.xml</suiteXmlFile>
+							</suiteXmlFiles>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<forkCount>${forkCount}</forkCount>
+							<reuseForks>false</reuseForks>
+							<argLine>-Duser.language=en</argLine>
+							<argLine>-Xmx1024m</argLine>
+							<argLine>-XX:MaxPermSize=256m</argLine>
+							<argLine>-Dfile.encoding=UTF-8</argLine>
+							<useFile>false</useFile>
+							<includes>
+								<include>**/Parallel*.java</include>
+							</includes>
+							<excludes>
+								<exclude>**/Abstract*.java</exclude>
+							</excludes>
+							<junitArtifactName>junit:junit</junitArtifactName>
+							<argLine>-Xmx512m</argLine>
+							<testFailureIgnore>true</testFailureIgnore>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<!--skip source code. remove attached-source <configuration> <skipSource>true</skipSource> 
+							</configuration> -->
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- End - execute  test runners -->
+
+                <!-- Git related demo -->
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.exe</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.github.temyers
+										</groupId>
+										<artifactId>
+											cucumber-jvm-parallel-plugin
+										</artifactId>
+										<versionRange>
+											[1.0.1,)
+										</versionRange>
+										<goals>
+											<goal>generateRunners</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+	
+		<dependency> <!--  SELENIUM  -->
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+<!--
+		<dependency> 
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>			
+		</dependency>
+       -->
+
+		<dependency> 
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${self4j.version}</version>
+		</dependency>
+		<dependency>
+        <groupId>javax.mail</groupId>
+        <artifactId>javax.mail-api</artifactId>
+    <version>1.4.7</version>
+    </dependency>
+   <dependency>
+  <groupId>javax.activation</groupId>
+  <artifactId>activation</artifactId>
+  <version>1.1.1</version>
+</dependency>
+
+<dependency>
+    <groupId>com.sun.mail</groupId>
+    <artifactId>javax.mail</artifactId>
+    <version>1.6.2</version>
+</dependency>
+		<dependency> 
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+<!--Newly Added-->
+		<dependency> <!--  LOGGERS  -->
+                     <groupId>org.apache.logging.log4j</groupId>
+                     <artifactId>log4j-api</artifactId>
+                     <version>${log4j.version}</version>                 
+              </dependency>
+      
+              <dependency> <!--  LOGGERS  -->
+                     <groupId>org.apache.logging.log4j</groupId>
+                     <artifactId>log4j-core</artifactId>
+                     <version>${log4j.version}</version>                 
+              </dependency>
+             
+              
+<!--Newly Added-->
+		<dependency> <!--  VIDEO RECORDER  -->
+			<groupId>com.github.stephenc.monte</groupId>
+			<artifactId>monte-screen-recorder</artifactId>
+			<version>0.7.7.0</version>
+		</dependency>	
+
+		<dependency> <!--  WINNIUM - DESKTOP DRIVER  -->
+			<groupId>com.github.2gis.winium</groupId>
+			<artifactId>winium-webdriver</artifactId>
+			<version>0.1.0-1</version>
+		</dependency>
+
+<dependency>
+    <groupId>ru.yandex.qatools.ashot</groupId>
+    <artifactId>ashot</artifactId>
+    <version>1.5.4</version>
+</dependency>
+		
+ <dependency>
+  <groupId>com.github.detro.ghostdriver</groupId>
+  <artifactId>phantomjsdriver</artifactId>
+  <version>1.0.1</version>
+</dependency>
+		
+		<dependency> <!--  WINNIUM - DESKTOP DRIVER  -->
+	        <groupId>com.github.2gis.winium</groupId>
+	        <artifactId>winium-elements-desktop</artifactId>
+	        <version>0.2.0-1</version>
+    	</dependency>
+		
+		<dependency> <!--  NECESSARY DEPENDENCIES (GUAVA/GSON) TO MAKE KARATE CALLS WORK  -->
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>23.0</version>
+		</dependency>
+		
+		<dependency> <!--  NECESSARY DEPENDENCIES (GUAVA/GSON) TO MAKE KARATE CALLS WORK  -->
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.2</version>
+		</dependency>
+ 
+	    <dependency> <!--  CALL COMMON CORE  -->
+	  		<groupId>telus.bt.automation</groupId>
+	  		<artifactId>telus-test-common-core</artifactId>
+	 	 	<version>${common.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.epam.reportportal</groupId>
+			<artifactId>agent-java-testng</artifactId>
+			<version>5.0.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.epam.reportportal</groupId>
+			<artifactId>logger-java-log4j</artifactId>
+			<version>5.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testNG.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+		<dependency>
+		    <groupId>io.github.bonigarcia</groupId>
+		    <artifactId>webdrivermanager</artifactId>
+		    <version>5.1.0</version>
+		</dependency>
+
+	</dependencies>
+	
+	<!--  TELUS REPO UPLOAD SETTINGS -->
+	<distributionManagement>
+	<!-- 
+		<repository>
+			<id>telus-mavenrepository </id>
+			<url>http://mavenrepository.tsl.telus.com/nexus/content/repositories/telus-m3</url>
+		</repository>
+	-->
+		<snapshotRepository>
+			<id>telus-mavenrepository</id>
+			<url>http://mavenrepository.tsl.telus.com/nexus/content/repositories/telus-m3-snapshots</url>
+		</snapshotRepository>
+		
+	</distributionManagement>
+	
+</project>

@@ -1,0 +1,15 @@
+{
+    "testDataRequirements":
+    {
+        "TDMRepo":
+        [
+            {
+            }
+         ],
+        "testData":
+        {
+			"Application": "GOOGLE",
+			"SearchCriteria": "Test"
+        }
+    }      
+}

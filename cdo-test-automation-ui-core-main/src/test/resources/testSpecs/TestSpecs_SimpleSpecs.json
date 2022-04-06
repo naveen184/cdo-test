@@ -1,0 +1,11 @@
+{
+    "testDataRequirements":
+    {
+        "testData":
+        {
+            "ban": '#BIILING_ACCOUNT_NUMBER',
+            "sub": '#TELEPHONE_NUMBER',
+            "wirelessaccountlist":""    
+        }
+    }      
+}

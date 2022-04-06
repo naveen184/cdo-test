@@ -1,0 +1,26 @@
+{
+    "testDataRequirements":
+    {
+        "TDMRepo":
+        [
+            {
+                "dataType": "Customer",
+                "dataRequirement": "WIRELESS ACCOUNT",
+                "numberOfDataVals": "1"
+            },
+            
+            {
+                "dataType": "Customer",
+                "dataRequirement": "BAN and SUB with Sharing Group",
+                "accountType": "CONSUMER REGULAR",
+                "numberOfDataVals": "5"
+            }
+         ],
+        "testData":
+        {
+            "ban": '#BIILING_ACCOUNT_NUMBER',
+            "sub": '#TELEPHONE_NUMBER',
+            "wirelessaccountlist":""    
+        }
+    }      
+}
